@@ -1,6 +1,7 @@
 ﻿namespace DefiningClasses1
 {
     using System;
+    using System.Text;
 
     public class Call
     {
@@ -71,6 +72,17 @@
                 }
                 this.callDuration = value;
             }
+        }
+
+        public override string ToString()
+        {
+            var result = new StringBuilder();
+            result.AppendFormat("Call date: {0}\n", this.Date);
+            result.AppendFormat("Call time: {0}\n", this.Time);
+            result.AppendFormat("Dialled number: {0}\n", this.DialedNumber);
+            result.AppendFormat("Call duration: {0}seconds\n", this.CallDuration);
+
+            return result.ToString();
         }
     }
 }

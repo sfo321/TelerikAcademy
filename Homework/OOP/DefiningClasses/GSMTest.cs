@@ -1,10 +1,9 @@
 ﻿namespace DefiningClasses1
 {
     using System;
-
     class GSMTest
     {
-        static void GSMTester()
+        public static void GSMTester()
         {
             MobilePhone[] phones = new MobilePhone[]
         {
@@ -19,18 +18,6 @@
                 Console.WriteLine(phones[i]);
             }
             Console.WriteLine(MobilePhone.IPhone4S);
-        }
-
-        static void CallTest()
-        {
-            MobilePhone TestGSM = new MobilePhone("Z500", "Sony", 500, "Ahmed",
-                new Battery(BatteryType.ChineseDog, 5, 12), new Display(5, 1200000));
-
-        }
-
-        static void Main()
-        {
-            GSMTester();
         }
     }
 }

@@ -6,6 +6,7 @@
 
     public class MobilePhone
     {
+        private const decimal PricePM = 0.37M;
         private static readonly MobilePhone iPhone4S = new MobilePhone("IPhone4S", "Apple", 600, "John Smith",
             new Battery(BatteryType.LiIon, 12, 4), new Display(5, 1600000));
 
@@ -133,12 +134,12 @@
             }
         }
 
-        public List<Call> CallHistory { get; private set; }
+        public List<Call> CallHistory { get; set; }
 
         public override string ToString()
         {
             var allinfo = new StringBuilder();
-
+            
             allinfo.AppendFormat("Phone Model: {0}\n", this.model);
             allinfo.AppendFormat("Manufacturer: {0}\n", this.manufacturer);
             if (this.owner != null)
@@ -150,6 +151,52 @@
             allinfo.AppendFormat("Display {0}\n", this.display);
 
             return allinfo.ToString();
+        }
+
+        public void AddCall(Call call)
+        {
+            this.CallHistory.Add(call);
+        }
+
+        public void DeleteCall(Call call)
+        {
+            this.CallHistory.Remove(call);
+        }
+
+        public void ClearHistory()
+        {
+            this.CallHistory.Clear();
+        }
+
+        public void CallInfo()
+        {
+            for (int i = 0; i < CallHistory.Count; i++)
+            {
+                Console.WriteLine(CallHistory[i]);
+            }
+        }
+
+        public void CallPrice()
+        {
+            decimal sum = 0;
+            foreach (Call call in CallHistory)
+            {
+                sum += ((call.CallDuration / 60) * PricePM);
+            }
+            Console.WriteLine("{0} BGN", sum);
+        }
+
+        public void RemoveLongestCall()
+        {
+            Call longestCall = CallHistory[0];
+            for (int i = 1; i < CallHistory.Count; i++)
+            {
+                if (CallHistory[i].CallDuration > longestCall.CallDuration)
+                {
+                    longestCall = CallHistory[i];
+                }
+            }
+            DeleteCall(longestCall);
         }
     }
 }
